@@ -1,0 +1,29 @@
+{
+  "name": "kea-nmea",
+  "version": "0.0.1",
+  "description": "NMEA Decoder/Encoder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardhi/kea-nmea.git"
+  },
+  "keywords": [
+    "nmea",
+    "encoder",
+    "decoder",
+    "codec"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardhi/kea-nmea/issues"
+  },
+  "homepage": "https://github.com/ardhi/kea-nmea#readme",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "nmea-simple": "^3.3.0"
+  }
+}
