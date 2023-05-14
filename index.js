@@ -1,17 +1,19 @@
 const { isFunction, keys } = require('lodash')
-const nmea = require('nmea-simple')
-const { Decoders, Factory } = require('./lib')
 const { parseStub } = require('nmea-simple/dist/codecs/PacketStub')
-const factory = new Factory()
 const transform = require('kea-transformer')
-const parseAis = require('./parse-ais')
+const nmea = require('nmea-simple')
+const Factory = require('./lib/factory')
+const decoders = require('./lib/decoders')
+const parseAis = require('./lib/parse-ais')
+
+const factory = new Factory()
 
 exports.decode = async (msg = '', transformer = {}) => {
   const stub = parseStub(msg.split(',')[0])
   const token = stub.sentenceId
   if (['VDM', 'VDO'].includes(token)) return parseAis({ msg, token, transformer })
   let rec
-  if (keys(Decoders).includes(token)) rec = nmea.parseGenericPacket(msg, factory)
+  if (keys(decoders).includes(token)) rec = nmea.parseGenericPacket(msg, factory)
   else rec = nmea.parseUnsafeNmeaSentence(msg)
   if (isFunction(transformer)) return transformer(rec, msg)
   return transform({ rec, token, transformer })
