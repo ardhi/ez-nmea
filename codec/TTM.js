@@ -1,6 +1,6 @@
 const helpers = require('nmea-simple/dist/helpers')
 const PacketStub = require('nmea-simple/dist/codecs/PacketStub')
-const _ = require('lodash')
+const { merge } = require('lodash')
 
 exports.sentenceId = 'TTM'
 exports.sentenceName = 'Tracked Target Message'
@@ -25,7 +25,7 @@ function decodeSentence(stub, fields) {
   }
 
   const s = PacketStub.initStubFields(stub, exports.sentenceId, exports.sentenceName)
-  return _.merge({}, s, data)
+  return merge({}, s, data)
 }
 
 exports.decodeSentence = decodeSentence

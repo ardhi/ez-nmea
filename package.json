@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ardhi/kea-nmea#readme",
   "dependencies": {
+    "ais-stream-decoder": "^2.1.2",
+    "kea-transformer": "0.0.4",
     "lodash": "^4.17.21",
     "nmea-simple": "^3.3.0"
   }

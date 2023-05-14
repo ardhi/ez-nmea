@@ -3,7 +3,7 @@ const rot = require('./codec/ROT')
 const tll = require('./codec/TLL')
 const ttm = require('./codec/TTM')
 
-var decoders = {
+var Decoders = {
   XDR: xdr.decodeSentence,
   ROT: rot.decodeSentence,
   TLL: tll.decodeSentence,
@@ -16,7 +16,7 @@ var Factory = (function () {
     this.ableToParseBadChecksum = ableToParseBadChecksum
   }
   Factory.getParser = function (stub) {
-    return decoders[stub.sentenceId]
+    return Decoders[stub.sentenceId]
   }
   Factory.prototype.assemble = function (stub, fields) {
     var parser = Factory.getParser(stub)
@@ -32,4 +32,4 @@ var Factory = (function () {
   return Factory
 }())
 
-module.exports = Factory
+module.exports = { Factory, Decoders }

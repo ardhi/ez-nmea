@@ -1,13 +1,13 @@
 const helpers = require('nmea-simple/dist/helpers')
 const PacketStub = require('nmea-simple/dist/codecs/PacketStub')
-const _ = require('lodash')
+const { map, merge, chunk } = require('lodash')
 
 exports.sentenceId = 'XDR'
 exports.sentenceName = 'Transducer Measurements'
 
 function decodeSentence(stub, fields) {
   fields.shift()
-  const data = _.map(_.chunk(fields, 4), f => {
+  const data = map(chunk(fields, 4), f => {
     return {
       id: f[3],
       type: f[0],
@@ -16,7 +16,7 @@ function decodeSentence(stub, fields) {
     }
   })
   const s = PacketStub.initStubFields(stub, exports.sentenceId, exports.sentenceName)
-  return _.merge({}, s, { data })
+  return merge({}, s, { data })
 }
 
 exports.decodeSentence = decodeSentence
